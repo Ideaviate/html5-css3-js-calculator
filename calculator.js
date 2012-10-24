@@ -22,13 +22,20 @@
 var Calculator = function () {
     var self = this,
         decimalMark = ".",
-        sum = 0;
+        sum = 0,
+        prevOperator;
 
     self.display = ko.observable("0");
+    self.isSum = ko.observable(false);
 
     // Callback for each number button
     self.number = function (item, event) {   
         var button = event.target.innerText;
+
+        if (self.isSum()) {
+            self.clearDisplay();
+            self.isSum(false);
+        }
 
         // Make sure we only add one decimal mark
         if (button == decimalMark && self.display().indexOf(decimalMark) > -1)
@@ -41,17 +48,51 @@ var Calculator = function () {
     // Callback for each operator button
     self.operator = function (item, event) {
         var button = event.target.innerText;
+        if (!self.isSum()) {
+            switch (prevOperator) {
+                case "+":
+                    sum = sum + parseFloat(self.display(), 10);
+                    break;
+                case "-":
+                    sum = sum - parseFloat(self.display(), 10);
+                    break;
+                case "x":
+                    sum = sum * parseFloat(self.display(), 10);
+                    break;
+                case "÷":
+                    sum = sum / parseFloat(self.display(), 10);
+                    break;
+                default:
+                    sum = parseFloat(self.display(), 10);
+            };
+        }
+
+        if (prevOperator)
+            self.display(sum);
+
+        prevOperator = (button === "=") ? null : button;
+        self.isSum(true);
     };
 
     // Callback for each backspace button
     self.backspace = function (item, event) {
-        self.display(self.display());
+        if (self.display().length > 1) {
+            self.display(self.display().substr(0, self.display().length - 1));
+        } else {
+            self.clearDisplay();
+        }
     };
 
     // Clear the calculator
     self.clear = function () {
-        self.display("0");
+        prevOperator = null;
+        self.clearDisplay();
         sum = 0;
+    };
+
+    // Clear the display
+    self.clearDisplay = function () {
+        self.display("0");
     };
 };
 
