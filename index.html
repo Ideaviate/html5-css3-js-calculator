@@ -6,49 +6,40 @@
 </head>
 <body>
 
-
-    <style>
-        
-
-    </style>
-
-
-    
     <div class="calculator">
-        <div class="u4 display">0</div>
+        <div class="u4 display" data-bind="text: display"></div>
 
-        <button class="u1 button button-red">c</button>
-        <button class="u1 button button-backspace button-gray">&#x21e4;</button>
-        <button class="u1 button button-gray">&#247;</button>
-        <button class="u1 button button-gray">x</button>
+        <button class="u1 button button-red" data-bind="click: clear">c</button>
+        <button class="u1 button button-backspace button-gray" data-bind="click: backspace">&#x21e4;</button>
+        <button class="u1 button button-gray" data-bind="click: operator">&#247;</button>
+        <button class="u1 button button-gray" data-bind="click: operator">x</button>
 
-        <button class="u1 button button-gray">7</button>
-        <button class="u1 button button-gray">8</button>
-        <button class="u1 button button-gray">9</button>
-        <button class="u1 button button-gray">-</button>
+        <button class="u1 button button-gray" data-bind="click: number">7</button>
+        <button class="u1 button button-gray" data-bind="click: number">8</button>
+        <button class="u1 button button-gray" data-bind="click: number">9</button>
+        <button class="u1 button button-gray" data-bind="click: operator">-</button>
         
-        <button class="u1 button button-gray">4</button>
-        <button class="u1 button button-gray">5</button>
-        <button class="u1 button button-gray">6</button>
-        <button class="u1 button button-gray">+</button>
+        <button class="u1 button button-gray" data-bind="click: number">4</button>
+        <button class="u1 button button-gray" data-bind="click: number">5</button>
+        <button class="u1 button button-gray" data-bind="click: number">6</button>
+        <button class="u1 button button-gray" data-bind="click: operator">+</button>
         
         <div class="u3">
             <div class="u-wrapper-inner">
-                <button class="u1 button button-gray">1</button>
-                <button class="u1 button button-gray">2</button>
-                <button class="u1 button button-gray">3</button>
-                <button class="u2 button button-gray">0</button>
-                <button class="u1 button button-gray">.</button>
+                <button class="u1 button button-gray" data-bind="click: number">1</button>
+                <button class="u1 button button-gray" data-bind="click: number">2</button>
+                <button class="u1 button button-gray" data-bind="click: number">3</button>
+                <button class="u2 button button-gray" data-bind="click: number">0</button>
+                <button class="u1 button button-gray" data-bind="click: number">.</button>
             </div>
         </div>
 
-        <button class="u1 button button-blue button-double-height">=</button>            
+        <button class="u1 button button-blue button-double-height" data-bind="click: operator">=</button>            
 
     </div>
 
-
-
-
+    <script type="text/javascript" src="knockout-2.1.0.js"></script>
+    <script type="text/javascript" src="calculator.js"></script>
 
 </body>
 </html>
