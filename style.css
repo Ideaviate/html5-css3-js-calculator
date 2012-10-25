@@ -75,10 +75,6 @@ table {
 .u4 {
     width: 178px;
 }
-/* Wrapper of units - remove double margin */
-.u-wrapper-inner {
-    margin: -3px;
-}
 
 .calculator {
 	-moz-border-radius: 5px;
@@ -106,11 +102,17 @@ table {
     box-sizing: border-box;
 	background-color: #17181E;
 	border: 1px solid #181A20;
-	color: #fff;
-	font-size: 22px;
-	line-height: 42px;
 	padding: 0 10px;
 	text-align: right;
+}
+.display-text {
+	color: #fff;
+	direction: rtl;
+	font-size: 22px;
+	line-height: 42px;
+	overflow: hidden;
+	unicode-bidi: embed;
+	width: 156px;
 }
 
 .button {
@@ -153,12 +155,10 @@ button::-moz-focus-inner {
 
 /* Buttons styling exceptions */
 .button-backspace {
-	font-size: 22px;
+	font-size: 17px;
 	font-weight: normal;
 }
-.button-double-height {
-	line-height: 58px;
-}
+
 
 /* Button skins */
 .button-gray {
