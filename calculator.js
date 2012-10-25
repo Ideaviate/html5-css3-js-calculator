@@ -90,6 +90,16 @@ var Calculator = function () {
         self.isShowingResult(true);
     };
 
+    // Callback for negating a number
+    self.negate = function () {
+        // Disable the negate button when showing a result
+        if (self.isShowingResult() || self.display() === "0")
+            return;
+
+        var newValue = (self.display().substr(0, 1) === "-") ? self.display().substr(1) : "-" + self.display();
+        self.display(newValue);
+    };
+
     // Callback for each backspace button
     self.backspace = function (item, event) {
         // Disable backspace if the calculator is shown a result
