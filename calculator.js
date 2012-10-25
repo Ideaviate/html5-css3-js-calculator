@@ -128,5 +128,69 @@ var Calculator = function () {
     };
 };
 
-// Let's do some magic!
+// Apply knockout bindings
 ko.applyBindings(new Calculator());
+
+// Enable keyboard controll
+(function () {
+    // Key codes and their associated calculator buttons
+    var calculatorKeys = {
+        48: "0", 49: "1", 50: "2", 51: "3", 52: "4", 53: "5", 54: "6",
+        55: "7", 56: "8", 57: "9", 96: "0", 97: "1", 98: "2", 99: "3",
+        100: "4", 101: "5", 102: "6", 103: "7", 104: "8", 105: "9",
+        106: "x", 107: "+", 109: "-", 110: ".", 111: "÷", 8: "backspace",
+        13: "=", 46: "c", 67: "c"
+    };
+
+    // Helper function to fire an event on an element
+    function fireEvent(element, event) {
+        if (document.createEvent) {
+            // Dispatch for firefox + others
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent(event, true, true); // event type,bubbling,cancelable
+            return !element.dispatchEvent(evt);
+        } else {
+            // Dispatch for IE
+            var evt = document.createEventObject();
+            return element.fireEvent('on' + event, evt)
+        }
+    }
+
+    // Helper functions to add/remove HTML-element classes
+    // as IE didn't support the classList property prior to IE10
+    function hasClass(ele, cls) {
+        return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    }
+
+    function addClass(ele, cls) {
+        if (!hasClass(ele, cls)) ele.className += " " + cls;
+    }
+
+    function removeClass(ele, cls) {
+        if (hasClass(ele, cls)) {
+            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+            ele.className = ele.className.replace(reg, ' ');
+        }
+    }
+
+    // Callback for every key stroke
+    var keycallback = function (e) {
+        // Check if the key was one of our calculator keys
+        if (e.keyCode in calculatorKeys) {
+            // Get button-element associated with key
+            var element = document.getElementById("calculator-button-" + calculatorKeys[e.keyCode]);
+            // Simulate button click on keystroke
+            addClass(element, "active");
+            setTimeout(function () { removeClass(element, "active"); }, 100);
+            // Fire click event
+            fireEvent(element, "click");
+        }
+    }
+
+    // Attach a keyup-event listener on the document
+    if (document.addEventListener) {
+        document.addEventListener('keyup', keycallback, false);
+    } else if (document.attachEvent) {
+        document.attachEvent('keyup', keycallback);
+    }
+})();
