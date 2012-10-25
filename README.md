@@ -7,6 +7,8 @@ something that looked clean, used no images and with a small amount of code.
 The result was a simple calculator built with pure CSS and a little bit
 of JavaScript and [Knockout](http://knockoutjs.com/) love.
 
+The calculator also has keyboard support through your keyboard numpad.
+
 ## Demo
 We published [a demo](http://ideaviate.com/projects/calculator) where you can 
 try the calculator online. The demo is also included if you clone the repo.
