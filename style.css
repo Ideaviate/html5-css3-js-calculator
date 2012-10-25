@@ -107,14 +107,17 @@ table {
 }
 .display-text {
 	color: #fff;
-	direction: rtl;
 	font-size: 22px;
 	line-height: 42px;
 	overflow: hidden;
 	unicode-bidi: embed;
-	width: 156px;
+	width: 1000px;
+    float: right;
 }
-
+.display-inner {
+    width: 156px;
+    overflow: hidden;
+}
 .button {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
