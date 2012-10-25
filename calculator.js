@@ -147,7 +147,7 @@ ko.applyBindings(new Calculator());
         if (document.createEvent) {
             // Dispatch for firefox + others
             var evt = document.createEvent("HTMLEvents");
-            evt.initEvent(event, true, true); // event type,bubbling,cancelable
+            evt.initEvent(event, true, true);
             return !element.dispatchEvent(evt);
         } else {
             // Dispatch for IE
