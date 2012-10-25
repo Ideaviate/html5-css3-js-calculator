@@ -5,7 +5,7 @@ latest web tools, such as KnockoutJS. We wanted to design and build
 something that looked clean, used no images and with a small amount of code.
 
 The result was a simple calculator built with pure CSS and a little bit
-of JavaScript and [KnockoutJS](http://knockoutjs.com/) love.
+of JavaScript and [Knockout](http://knockoutjs.com/) love.
 
 ## Demo
 We published [a demo](http://ideaviate.com/projects/calculator) where you can 
