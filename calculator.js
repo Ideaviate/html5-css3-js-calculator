@@ -33,7 +33,7 @@ var Calculator = function () {
 
     // Callback for each number button
     self.number = function (item, event) {   
-        var button = event.target.innerText;
+        var button = event.target.innerText || event.target.textContent;
 
         // If a result has been shown, make sure we
         // clear the display before displaying any new numbers
@@ -55,7 +55,7 @@ var Calculator = function () {
 
     // Callback for each operator button
     self.operator = function (item, event) {
-        var button = event.target.innerText;
+        var button = event.target.innerText || event.target.textContent;
         // Only perform calculation if numbers
         // has been entered since last operator button was pressed
         if (!self.isShowingResult()) {
