@@ -1,268 +1,235 @@
-﻿
-/*  ################# 
- *	### CSS Reset ###
- *  ################# */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,600,700,900,200')
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-    line-height: 1;
-}
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-/* End of CSS Reset */
+@import 'bourbon'
 
+$foreground--dark: #151515
 
+$background-gradient-1: #B6B2AB
+$background-gradient-2: #B3AFA7
 
+$background-gradient-3: #B8B5AF
+$background-gradient-4: #78736B
 
-/*  ######################### 
- *	### Calculator styles ###
- *  ######################### */
+$background-gradient-5: #6F6862
+$background-gradient-6: #58504B
 
-/* Grid units */
-.u1,
-.u2,
-.u3,
-.u4 {
-    float: left;
-    margin: 3px;
-}
-.u1 {
-    width: 40px;
-}
-.u2 {
-    width: 86px;
-}
-.u3 {
-    width: 132px;
-}
-.u4 {
-    width: 178px;
-}
+$background-gradient-7: #5F574E
+$background-gradient-8: #625A51
 
-.calculator {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	-moz-box-shadow: inset 0px 1px #7b839b;
-	-webkit-box-shadow: inset 0px 1px #7b839b;
-	box-shadow: inset 0px 1px #7b839b;
-	background-color: #3C4150;
-	border: 1px solid #181A20;
-	float: left;
-	padding: 6px;
-	width: 184px;
-}
+// I don't know how to get the colors closer here, would need the actual hsla
+$gradient-blue-1: hsla(226, 12%, 40%, 0.76)
+$gradient-blue-2: hsla(222, 12%, 13%, 0.80)
 
-.display {
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-moz-box-shadow: inset 0 1px 1px #0A0B0D, 0px 1px #5E6370;
-	-webkit-box-shadow: inset 0 1px 1px #0A0B0D, 0px 1px #5E6370;
-	box-shadow: inset 0 1px 1px #0A0B0D, 0px 1px #5E6370;
-	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-	background-color: #17181E;
-	border: 1px solid #181A20;
-	padding: 0 10px;
-	text-align: right;
-}
-.display-text {
-	color: #fff;
-	font-size: 22px;
-	line-height: 42px;
-	overflow: hidden;
-	unicode-bidi: embed;
-	width: 1000px;
-    float: right;
-}
-.display-inner {
-    width: 156px;
-    overflow: hidden;
-}
-.button {
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	border: 1px solid #181A20;
-	color: #fff;
-	cursor: pointer;
-	float: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 25px;
-	padding: 0 8px;
-	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
-}
-.button:active,
-.button-active {
-	position: relative;
-	top: 1px;
-}
-.button:active,
-.button:focus {
-	outline: 0;
-}
-/* Mozilla fix */
-button::-moz-focus-inner {
-	padding: 0;
-	border: 0;
-}
+$gradient-orange-1: #FF8D4B
+$gradient-orange-2: #FF542E
 
-/* Buttons styling exceptions */
-.button-backspace {
-	font-size: 17px;
-	font-weight: normal;
-}
+$calculator-width: 260px
+$header-padding-left: 20px
+
+@function negative($value)
+	@return -(abs($value))
+
+@mixin calcbutton
+	&
+		cursor: pointer
+		transition: box-shadow 0.2s, background-color 0.15s
+		text-shadow: 1px 1px 2px rgba(black, 0.15)
+
+	&:hover
+		background: rgba(black, 0.08)
+
+	&:active,
+	&.is-active
+		box-shadow: inset 0 3px 15px 0 rgba(black, 0.3)
+
+	&.has-children:hover,
+	&.has-children:active
+		background: initial
+		box-shadow: none
+		cursor: default
 
 
-/* Button skins */
-.button-gray {
-	-moz-box-shadow: inset 0px 1px #9498A3, 0 1px 1px #323643;
-	-webkit-box-shadow: inset 0px 1px #9498A3, 0 1px 1px #323643;
-	box-shadow: inset 0px 1px #9498A3, 0 1px 1px #323643;
-	background-color: #595E6B;
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#656976), to(#4B505E));
-	background-image: -webkit-linear-gradient(top, #656976, #4B505E);
-	background-image: -o-linear-gradient(top, #656976, #4B505E);
-	background-image: linear-gradient(to bottom, #656976, #4B505E);
-	background-image: -moz-linear-gradient(top, #656976, #4B505E);
-	background-repeat: repeat-x;
-	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff656976', endColorstr='#ff4B505E', GradientType=0);
-	text-shadow: 0px -1px #181A20;
-}
-	.button-gray:hover {
-		background-color: #666B78;
-		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#757985), to(#545867));
-		background-image: -webkit-linear-gradient(top, #757985, #545867);
-		background-image: -o-linear-gradient(top, #757985, #545867);
-		background-image: linear-gradient(to bottom, #757985, #545867);
-		background-image: -moz-linear-gradient(top, #757985, #545867);
-		background-repeat: repeat-x;
-		filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff757985', endColorstr='#ff545867', GradientType=0);
-	}
-	.button-gray.active, 
-	.button-gray:active {
-		-webkit-box-shadow: inset 0 1px 1px #14171E, 0px 1px #5E6370;
-		-moz-box-shadow: inset 0 1px 1px #14171E, 0px 1px #5E6370;
-		box-shadow: inset 0 1px 1px #14171E, 0px 1px #5E6370;
-		background-color: #292D3A;
-		background-image: none;
-		filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	}
-.button-red {
-	-moz-box-shadow: inset 0px 1px #CA9883, 0 1px 1px #323643;
-	-webkit-box-shadow: inset 0px 1px #CA9883, 0 1px 1px #323643;
-	box-shadow: inset 0px 1px #CA9883, 0 1px 1px #323643;
-	background-color: #965F48;
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#A46E57), to(#844D37));
-	background-image: -webkit-linear-gradient(top, #A46E57, #844D37);
-	background-image: -o-linear-gradient(top, #A46E57, #844D37);
-	background-image: linear-gradient(to bottom, #A46E57, #844D37);
-	background-image: -moz-linear-gradient(top, #A46E57, #844D37);
-	background-repeat: repeat-x;
-	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffA46E57', endColorstr='#ff844D37', GradientType=0);
-	text-shadow: 0px -1px #58372A;
-}
-	.button-red:hover {
-		background-color: #A26B55;
-		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B4806A), to(#915740));
-		background-image: -webkit-linear-gradient(top, #B4806A, #915740);
-		background-image: -o-linear-gradient(top, #B4806A, #915740);
-		background-image: linear-gradient(to bottom, #B4806A, #915740);
-		background-image: -moz-linear-gradient(top, #B4806A, #915740);
-		background-repeat: repeat-x;
-		filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffB4806A', endColorstr='#ff915740', GradientType=0);
-	}
-	.button-red.active, 
-	.button-red:active {
-		-webkit-box-shadow: inset 0 1px 1px #2A130C, 0px 1px #5E6370;
-		-moz-box-shadow: inset 0 1px 1px #2A130C, 0px 1px #5E6370;
-		box-shadow: inset 0 1px 1px #2A130C, 0px 1px #5E6370;
-		background-color: #472619;
-		background-image: none;
-		filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	}
-.button-blue {
-	-moz-box-shadow: inset 0px 1px #BCD6FF, 0 1px 1px #323643;
-	-webkit-box-shadow: inset 0px 1px #BCD6FF, 0 1px 1px #323643;
-	box-shadow: inset 0px 1px #BCD6FF, 0 1px 1px #323643;
-	background-color: #598FE9;
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6DA1F8), to(#427BD8));
-	background-image: -webkit-linear-gradient(top, #6DA1F8, #427BD8);
-	background-image: -o-linear-gradient(top, #6DA1F8, #427BD8);
-	background-image: linear-gradient(to bottom, #6DA1F8, #427BD8);
-	background-image: -moz-linear-gradient(top, #6DA1F8, #427BD8);
-	background-repeat: repeat-x;
-	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff6DA1F8', endColorstr='#ff427BD8', GradientType=0);
-	text-shadow: 0px -1px #2C4E88;
-}
-	.button-blue:hover {
-		background-color: #6E9EED;
-		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#83B0FC), to(#578ADE));
-		background-image: -webkit-linear-gradient(top, #83B0FC, #578ADE);
-		background-image: -o-linear-gradient(top, #83B0FC, #578ADE);
-		background-image: linear-gradient(to bottom, #83B0FC, #578ADE);
-		background-image: -moz-linear-gradient(top, #83B0FC, #578ADE);
-		background-repeat: repeat-x;
-		filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff83B0FC', endColorstr='#ff578ADE', GradientType=0);
-	}
-	.button-blue.active, 
-	.button-blue:active {
-		-webkit-box-shadow: inset 0 1px 1px #0E192E, 0px 1px #5E6370;
-		-moz-box-shadow: inset 0 1px 1px #0E192E, 0px 1px #5E6370;
-		box-shadow: inset 0 1px 1px #0E192E, 0px 1px #5E6370;
-		background-color: #1E3357;
-		background-image: none;
-		filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	}
+html
+	box-sizing: border-box
+	color: #222
+	font-size: 1rem
+	font-family: Source Sans Pro
+	line-height: 1.5
+	text-rendering: optimizeLegibility
+
+*,
+*:before,
+*:after
+	box-sizing: inherit
 
 
+body
+	background:
+		size: cover
+		repeat: no-repeat
+	+linear-gradient(135deg, $background-gradient-1 0%, $background-gradient-2 25%, $background-gradient-3 25%, $background-gradient-4 50%, $background-gradient-5 50%, $background-gradient-6 75%, $background-gradient-7 75%, $background-gradient-8 100%)
+	min-height: 100vh
 
+
+.App
+	opacity: 0
+	transition: opacity 0.3s
+
+.Calculator
+	box-shadow: 12px 18px 45px 0 rgba(black, 0.25)
+	cursor: default
+	margin: 0 auto
+	transform: translate(-50%, -50%)
+	user-select: none
+	+position(absolute, 50% null null 50%)
+	+size($calculator-width null)
+
+.Calculator-header
+	background: white
+	overflow: hidden
+	padding: 20px $header-padding-left
+	position: relative
+	text-align: right
+
+@at-root
+	$height: 22px
+
+	.Calculator-expressions
+		color: adjust-color($gradient-blue-1, $saturation: -20, $lightness: 22)
+		display: block
+		float: right
+		font-size: 15px
+		line-height: $height
+		min-height: $height
+		position: relative
+		white-space: nowrap
+		width: 100%
+		word-wrap: normal
+
+	.Calculator-expressionsList
+		display: block
+		float: right
+
+	// 	Not sure how to represent that there are more expressions to the left
+	.Calculator__expressionsOverflow
+		$width: 2px
+		color: #333
+		box-shadow: 5px 0 20px 4px rgba(black, 0.3)
+		font-weight: 700
+		opacity: 0
+		padding-right: 0px
+		text-align: center
+		transition: opacity 0.5s
+		transform: translate(0, -50%)
+		+position(absolute, 50% null null negative($header-padding-left) - $width - 2)
+		+size($width $height - 5)
+
+		&:before
+			content: ''
+
+		&.is-showing
+			opacity: 1
+
+
+.Calculator-operands
+	color: $foreground--dark
+	font-size: 60px
+	font-weight: 200
+	line-height: 1.1
+	clear: both
+
+.Calculator-currentOperand
+	display: block
+	overflow: visible
+	min-height: 60px
+	line-height: 60px
+	float: right
+	transition-duration: 0.2s
+	transition-property: font-size
+
+	&.has-error
+		color: hsla(10,85%,57%,1)
+
+.Calculator-body
+	background: white
+
+.Calculator-buttonsContainer
+	$overflow: 18px
+	display: flex
+	flex-wrap: wrap
+	overflow: visible
+	position: relative
+
+	&:before
+		+linear-gradient(top, darken($gradient-blue-1, 0), darken($gradient-blue-2, 0))
+		box-shadow: 17px 27px 72px 1px rgba(black, 0.3)
+		filter: drop-shadow(0px 0px 7px rgba(black, 0.2))
+		content: ''
+		+position(absolute, 0 negative($overflow) 0 negative($overflow))
+
+.Calculator-button
+	color: rgba(white, 0.8)
+	cursor: pointer
+	font-size: 24px
+	font-weight: 300
+	flex: 25%
+	line-height: 70px
+	text-align: center
+	position: relative
+	z-index: 1
+	+calcbutton
+
+	> span
+		display: block
+
+
+.Calculator-button--negation,
+.Calculator-button--modulo
+	font-size: 18px
+
+.Calculator-button--square
+	font-size: 16px
+
+.Calculator-button--division
+	font-size: 20px
+
+.Calculator-button--multiplication
+	font-size: 30px
+
+.Calculator-button--addition
+	font-size: 26px
+
+.Calculator-button--subtraction
+	font-size: 25px
+
+.Calculator-button--paren
+	display: flex
+	font-size: 18px
+
+	&:hover,
+	&:active
+		background: initial !important
+		box-shadow: none !important
+		cursor: default !important
+
+	> span
+		flex: 50%
+		+calcbutton
+
+.Calculator-equals
+	+linear-gradient(left, $gradient-orange-1, $gradient-orange-2)
+	cursor: pointer
+	padding: 26px 0
+	position: relative
+	z-index: -1
+
+.Calculator-equalsLine
+	background: white
+	display: block
+	margin: 0 auto 6px
+	box-shadow: 0px 0px 2px rgba(black, 0.4)
+	+size(20px 1px)
+
+.Calculator-equalsLine:last-child
+	margin-bottom: 0
