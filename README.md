@@ -9,11 +9,8 @@ of JavaScript and [Knockout](http://knockoutjs.com/) love.
 
 The calculator also has keyboard support through your keyboard numpad.
 
-## Demo
-We published [a demo](http://ideaviate.com/projects/calculator) where you can 
-try the calculator online. The demo is also included if you clone the repo.
+## License
 
-## License 
 Copyright (C) 2012 Ideaviate AB
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
