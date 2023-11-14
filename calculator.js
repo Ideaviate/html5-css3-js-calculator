@@ -81,7 +81,8 @@ var Calculator = function () {
         // Avoid showing a result until you have at least
         // two terms to perform calculation on
         if (prevOperator)
-            self.display(sum);
+            // self.display(sum);
+            self.display(parseFloat(sum.toFixed(2)).toString());
 
         // Make sure we don't try to calculate with the equal sign
         prevOperator = (button === "=") ? null : button;
